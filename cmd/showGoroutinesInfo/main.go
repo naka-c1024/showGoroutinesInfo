@@ -7,7 +7,8 @@ import (
 )
 
 func main() {
-	showGoroutinesInfo.Do("before main")
+	showGoroutinesInfo.Do("init main")
+
 	var wg sync.WaitGroup
 
 	wg.Add(1)
@@ -17,7 +18,8 @@ func main() {
 	}()
 
 	wg.Wait()
-	showGoroutinesInfo.Do("after main")
+
+	showGoroutinesInfo.Do("last main")
 }
 
 func goroutineFirst() {

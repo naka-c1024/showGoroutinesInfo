@@ -21,7 +21,7 @@ func Do(regionName string) {
 
 	fmt.Printf("\n=== goroutines info: %s ===\n", regionName)
 
-	buf := make([]byte, 1024)
+	buf := make([]byte, 1<<20)
 	n := runtime.Stack(buf, true)
 	str := string(buf[:n])
 
@@ -36,11 +36,8 @@ func Do(regionName string) {
 				goroutine = GoroutineInfo{}
 			}
 			lineSplit := strings.Split(strings.TrimSpace(line), " ")
-			if len(lineSplit) >= 3 {
-				goroutine.ID = lineSplit[1]
-				state := strings.Join(lineSplit[2:], " ")
-				goroutine.State = strings.Trim(strings.Trim(strings.Trim(state, ":"), "["), "]")
-			}
+			state := lineSplit[2]
+			goroutine.State = strings.Trim(strings.Trim(strings.Trim(state, ":"), "["), "]")
 		} else if strings.HasPrefix(line, "created by") {
 			goroutine.Created = strings.TrimSpace(strings.TrimPrefix(line, "created by"))
 		}
