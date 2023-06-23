@@ -15,7 +15,7 @@ type GoroutineInfo struct {
 
 var m sync.Mutex
 
-func showGoroutinesInfo(regionName string) {
+func Do(regionName string) {
 	m.Lock()
 	defer m.Unlock()
 
