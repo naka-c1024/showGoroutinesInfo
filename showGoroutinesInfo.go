@@ -36,6 +36,7 @@ func Do(regionName string) {
 				goroutine = GoroutineInfo{}
 			}
 			lineSplit := strings.Split(strings.TrimSpace(line), " ")
+			goroutine.ID = lineSplit[1]
 			state := lineSplit[2]
 			goroutine.State = strings.Trim(strings.Trim(strings.Trim(state, ":"), "["), "]")
 		} else if strings.HasPrefix(line, "created by") {
